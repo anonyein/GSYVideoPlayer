@@ -841,9 +841,9 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
 
             setStateAndUi(CURRENT_STATE_PLAYING);
 
-            if (getGSYVideoManager() != null && mSeekOnStart > 0) {
+            if (getGSYVideoManager() != null && mSeekOnStart >= 0) {
                 getGSYVideoManager().seekTo(mSeekOnStart);
-                mSeekOnStart = 0;
+                mSeekOnStart = -1;
             }
         } catch (Exception e) {
             e.printStackTrace();
