@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+    paths-ignore:
+      - '.idea/**'
+      - '.gitattributes'
+      - '.github/**.json'
+      - '.gitignore'
+      - '.gitmodules'
+      - '**.md'
+      - '**/*.txt'
+      - '**/*.png'
+      - '**/*.jpg'
+      - 'LICENSE'
+      - 'NOTICE'
+  pull_request:
+    paths-ignore:
+      - '.idea/**'
+      - '.gitattributes'
+      - '.github/**.json'
+      - '.gitignore'
+      - '.gitmodules'
+      - '**.md'
+      - '**/*.txt'
+      - '**/*.png'
+      - '**/*.jpg'
+      - 'LICENSE'
+      - 'NOTICE'
+
+jobs:
+  build:
+    name: Build & Upload AAR/JAR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 21
+
+      # 如果你的库模块名不是 app，请改成实际模块名（例如 :library）
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: assembleDebug   # 生成 AAR / JAR
+
+      # 上传所有 aar 和 jar 文件
+      - uses: actions/upload-artifact@v4
+        with:
+          name: libs-debug
+          path: |
+            **/build/outputs/aar/*.aar
+            **/build/libs/*.jar
