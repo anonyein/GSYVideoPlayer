@@ -8,7 +8,7 @@ apply from: "../gradle/exported.gradle"
 android {
     defaultConfig {
         applicationId "com.example.gsyvideoplayer"
-        versionCode 21
+        versionCode 22
         versionName PROJ_VERSION
 
         // M7-a-5：jUPnP 3.x 依赖 Jetty 9.4，Jetty 9.4 底层用了 MethodHandle.invoke，
@@ -86,7 +86,12 @@ dependencies {
 
     implementation androidDependencies.multidex
 
+    implementation androidDependencies.windowCore
+    implementation androidDependencies.windowJava
+
     implementation project(":gsyVideoPlayer")
+    // 13.2.1：投屏协议实现改为可选 module；Demo 显式依赖以保留 DLNA 功能。
+    implementation project(":gsyVideoPlayer-cast")
     implementation project(":gsyVideoPlayer-aliplay")
     implementation project(":gsyVideoPlayer-compose")
 

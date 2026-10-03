@@ -1,3 +1,20 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+        }
+        dependencies {
+            classpath("com.android.tools:r8:9.4.14")
+        }
+    }
+}
+
 include ":app",
     ":gsyVideoPlayer",
     ":gsyVideoPlayer-java",
@@ -8,6 +25,8 @@ include ":app",
     ":gsyVideoPlayer-x86_64",
     ":gsyVideoPlayer-ex_so",
     ":gsyVideoPlayer-proxy_cache",
+    ":gsyVideoPlayer-cast",
+    ":gsyVideoPlayer-rtmp",
     ":gsyVideoPlayer-exo_player2",
     ":gsyVideoPlayer-base",
     ":gsyVideoPlayer-aliplay",
